@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inspiration Clips — Nick Ang</title>
+  <meta name="description" content="Video clips and quotes that remind me why I'm doing this.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0a;
+      color: #e8e8e8;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      color: #888;
+      margin-bottom: 3rem;
+      font-size: 1.1rem;
+    }
+
+    .clips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr));
+      gap: 3rem;
+    }
+
+    .clip-card {
+      background: #141414;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #222;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .clip-card:hover {
+      transform: translateY(-2px);
+      border-color: #444;
+    }
+
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .clip-content {
+      padding: 1.5rem;
+    }
+
+    .clip-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .clip-quote {
+      background: #1a1a1a;
+      border-left: 3px solid #666;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+      font-style: italic;
+      color: #ccc;
+      line-height: 1.7;
+    }
+
+    .clip-annotation {
+      color: #999;
+      font-size: 0.95rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #222;
+    }
+
+    .clip-meta {
+      color: #666;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 1.5rem 1rem;
+      }
+
+      .clips-grid {
+        gap: 2rem;
+      }
+
+      .clip-content {
+        padding: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Inspiration Clips</h1>
+    <p class="subtitle">When things get heavy, remember these.</p>
+
+    <div class="clips-grid" id="clips"></div>
+  </div>
+
+  <script>
+    const clips = [
+      {
+        title: "Steve Jobs' Morning Affirmation (Age 33)",
+        videoId: "QYAnJ_QyCQg",
+        startTime: 489,
+        quote: "For the past 33 years, I have looked in the mirror every morning and asked myself: 'If today were the last day of my life, would I want to do what I am about to do today?' And whenever the answer has been 'No' for too many days in a row, I know I need to change something.",
+        annotation: "From his 2005 Stanford commencement address. At age 17, Jobs read: 'If you live each day as if it was your last, someday you'll most certainly be right.' That quote inspired this daily practice, which he maintained for 33 years. This is how he stayed aligned with what truly mattered.",
+        context: "Feb 28, 2026 — You're at a crossroads: can't afford HDB in Singapore without income. The question isn't 'what should I do?' — it's 'am I doing what I'd want to do if today were my last day?' Answer: Yes. You're building websites for restaurants, shipping demos, ready to send pitches. Keep going."
+      },
+      {
+        title: "Stay Hungry. Stay Foolish.",
+        videoId: "QYAnJ_QyCQg",
+        startTime: 747,
+        quote: "Stewart Brand and his team put out several issues of The Whole Earth Catalog, and then when it had run its course, they put out a final issue. It was the mid-1970s, and I was your age. On the back cover of their final issue was a photograph of an early morning country road, the kind you might find yourself hitchhiking on if you were so adventurous. Beneath it were the words: 'Stay Hungry. Stay Foolish.' It was their farewell message as they signed off. Stay Hungry. Stay Foolish. And I have always wished that for myself. And now, as you graduate to begin anew, I wish that for you.",
+        annotation: "The origin of the mantra Jobs lived by. The Whole Earth Catalog (1974) — 'Google in paperback form, 35 years before Google' — signed off with this message. It meant: don't settle for the limited life society tells you to live. Everything around you was made up by people no smarter than you. You can change it, influence it, build your own things.",
+        context: "This is what you aspire to. Don't bash into the walls trying to have a nice family life and save a little money. Life can be much broader. Build something."
+      }
+    ];
+
+    function renderClips() {
+      const container = document.getElementById('clips');
+
+      clips.forEach(clip => {
+        const card = document.createElement('div');
+        card.className = 'clip-card';
+
+        card.innerHTML = `
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/${clip.videoId}?start=${clip.startTime}"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="clip-content">
+            <div class="clip-title">${clip.title}</div>
+            <div class="clip-quote">${clip.quote}</div>
+            <div class="clip-annotation">
+              ${clip.annotation}
+              ${clip.context ? `<br><br><strong>Why this matters now:</strong> ${clip.context}` : ''}
+            </div>
+            <div class="clip-meta">Steve Jobs, 2005 Stanford Commencement Address</div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    renderClips();
+  </script>
+</body>
+</html>
