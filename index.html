@@ -106,6 +106,21 @@
       color: #666;
       font-size: 0.85rem;
       margin-top: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .youtube-link {
+      color: #888;
+      text-decoration: none;
+      font-size: 0.8rem;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+
+    .youtube-link:hover {
+      opacity: 1;
     }
 
     @media (max-width: 640px) {
@@ -136,6 +151,7 @@
       {
         title: "Steve Jobs' Morning Affirmation (Age 33)",
         videoFile: "clips/morning-affirmation.mp4",
+        youtubeUrl: "https://youtu.be/QYAnJ_QyCQg?t=489",
         quote: "For the past 33 years, I have looked in the mirror every morning and asked myself: 'If today were the last day of my life, would I want to do what I am about to do today?' And whenever the answer has been 'No' for too many days in a row, I know I need to change something.",
         annotation: "From his 2005 Stanford commencement address. At age 17, Jobs read: 'If you live each day as if it was your last, someday you'll most certainly be right.' That quote inspired this daily practice, which he maintained for 33 years. This is how he stayed aligned with what truly mattered.",
         context: "Feb 28, 2026 — You're at a crossroads: can't afford HDB in Singapore without income. The question isn't 'what should I do?' — it's 'am I doing what I'd want to do if today were my last day?' Answer: Yes. You're building websites for restaurants, shipping demos, ready to send pitches. Keep going."
@@ -143,6 +159,7 @@
       {
         title: "Stay Hungry. Stay Foolish.",
         videoFile: "clips/stay-hungry-stay-foolish.mp4",
+        youtubeUrl: "https://youtu.be/QYAnJ_QyCQg?t=747",
         quote: "Stewart Brand and his team put out several issues of The Whole Earth Catalog, and then when it had run its course, they put out a final issue. It was the mid-1970s, and I was your age. On the back cover of their final issue was a photograph of an early morning country road, the kind you might find yourself hitchhiking on if you were so adventurous. Beneath it were the words: 'Stay Hungry. Stay Foolish.' It was their farewell message as they signed off. Stay Hungry. Stay Foolish. And I have always wished that for myself. And now, as you graduate to begin anew, I wish that for you.",
         annotation: "The origin of the mantra Jobs lived by. The Whole Earth Catalog (1974) — 'Google in paperback form, 35 years before Google' — signed off with this message. It meant: don't settle for the limited life society tells you to live. Everything around you was made up by people no smarter than you. You can change it, influence it, build your own things.",
         context: "This is what you aspire to. Don't bash into the walls trying to have a nice family life and save a little money. Life can be much broader. Build something."
@@ -170,7 +187,10 @@
               ${clip.annotation}
               ${clip.context ? `<br><br><strong>Why this matters now:</strong> ${clip.context}` : ''}
             </div>
-            <div class="clip-meta">Steve Jobs, 2005 Stanford Commencement Address</div>
+            <div class="clip-meta">
+              <span>Steve Jobs, 2005 Stanford Commencement Address</span>
+              <a href="${clip.youtubeUrl}" target="_blank" class="youtube-link">Watch on YouTube ↗</a>
+            </div>
           </div>
         `;
 
